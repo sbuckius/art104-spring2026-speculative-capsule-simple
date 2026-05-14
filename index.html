@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Speculation Capsule — ART104</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f5f2ed url('images/index_background.png') center center / cover no-repeat fixed;
+    color: #111;
+    min-height: 100vh;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,242,237,0.94);
+    border-bottom: 1px solid #ccc;
+    padding: 0.75rem 1.5rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .nav-title { font-size: 0.9rem; font-weight: normal; letter-spacing: 0.04em; }
+  .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: baseline; }
+  .nav-links a, .nav-links button {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #333; text-decoration: none; background: none; border: none;
+    border-bottom: 1px solid transparent; cursor: pointer;
+    transition: border-color 0.15s; padding: 0;
+  }
+  .nav-links a:hover, .nav-links button:hover { border-bottom-color: #333; }
+  .page {
+    min-height: calc(100vh - 44px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(245,242,237,0.65);
+    padding: 2rem 1rem;
+  }
+  .page-eyebrow {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #666; margin-bottom: 0.6rem; text-align: center;
+  }
+  .page-title {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    font-weight: normal; letter-spacing: -0.01em;
+    margin-bottom: 0.4rem; text-align: center;
+  }
+  .page-meta {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.62rem; letter-spacing: 0.1em; color: #888;
+    margin-bottom: 3rem; text-align: center;
+  }
+  .circle-wrap {
+    position: relative;
+    width: min(420px, 90vw);
+    height: min(420px, 90vw);
+    margin: 0 auto;
+  }
+  .circle-wrap::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 60%; height: 60%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .circle-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+  .circle-center-count {
+    font-size: 1.6rem; font-weight: normal; color: #bbb; display: block; line-height: 1;
+  }
+  .circle-center-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #999; display: block; line-height: 1.6;
+  }
+  .mod-btn {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: clamp(100px, 24vw, 130px);
+    text-align: center;
+    text-decoration: none;
+    color: #111;
+    background: rgba(245,242,237,0.9);
+    border: 1px solid #bbb;
+    padding: 0.7rem 0.5rem;
+    transition: background 0.2s, border-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+  }
+  .mod-btn:hover { background: rgba(255,255,255,1); border-color: #555; }
+  .mod-btn-num {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #888; display: block; margin-bottom: 0.3rem;
+  }
+  .mod-btn-title {
+    font-size: clamp(0.68rem, 2vw, 0.82rem);
+    font-weight: normal; line-height: 1.25; display: block; margin-bottom: 0.3rem;
+  }
+  .mod-btn-count {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.5rem; letter-spacing: 0.1em; color: #999; display: block;
+  }
+  footer {
+    background: rgba(245,242,237,0.9); border-top: 1px solid #ccc;
+    padding: 1.2rem 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #888; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  #ai-disclaimer {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,8,5,0.88);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  #ai-disclaimer.open { display: flex; }
+  .disc-inner {
+    max-width: 580px; width: 100%; background: #f5f2ed;
+    padding: 2rem; max-height: 85vh; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .disc-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #888; margin-bottom: 0.6rem;
+  }
+  .disc-title {
+    font-size: 1.2rem; font-weight: normal;
+    margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #ccc;
+  }
+  .disc-body p { font-size: 0.85rem; line-height: 1.75; color: #333; margin-bottom: 0.85rem; }
+  .disc-close {
+    margin-top: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    background: none; border: 1px solid #bbb; padding: 0.4rem 0.9rem;
+    cursor: pointer; color: #111; transition: opacity 0.15s;
+  }
+  .disc-close:hover { opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">Speculation Capsule</span>
+  <div class="nav-links">
+    <a href="splash.html">← Splash</a>
+    <button onclick="document.getElementById('ai-disclaimer').classList.add('open')">A Note on AI</button>
+  </div>
+</nav>
+
+<div class="page">
+  <p class="page-eyebrow">ART104 · Spring 2026</p>
+  <h1 class="page-title">Speculation Capsule</h1>
+  <p class="page-meta">56 artifacts · 6 modules</p>
+  <div class="circle-wrap" id="circle">
+    <div class="circle-center">
+      <span class="circle-center-count">56</span>
+      <span class="circle-center-label">artifacts</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>ART104 · Spring 2026 · 56 Transmissions</span>
+  <span>All nodes monitored</span>
+</footer>
+
+<div id="ai-disclaimer">
+  <div class="disc-inner">
+    <p class="disc-label">Speculation Capsule · ART104 · Spring 2026</p>
+    <h2 class="disc-title">A Note on AI (Automation)</h2>
+    <div class="disc-body">
+      <p>Sarah used AI (automation) to help construct the HTML to set up this website by prompting it with details about the idea, the features, the parts, and the framework. Sarah believes that many things should not be automated using AI and that users should be cautious about the inaccuracies and bias in the system, exploitation of workers, the environmental impact, and the unethical use of the work of people without compensation, consent, or attribution.</p>
+      <p>Another issue that might negatively impact humans is the process by which it is forced into our lives and technology and work and thus could result in our becoming reliant on it, without the ability to back out. Once everyone must use it, it forces the speed and style and aesthetics into the system, which requires everyone to utilize it to stay relevant and up to speed. This is a concern, especially because the design, deployment, and use is in the power of a few individuals (without guardrails or oversight). Sarah worries about this reliance on the technology when those in power make the cost to use it high and this creates an equity issue.</p>
+      <p>While Sarah still struggles with the issues related to how AI (automation) could impact humans and the world, Sarah is experimenting with using it to support education and equity in instances where it could support students and learning. The use of it in this case is debatable, because I used it to help me generate the code for the website that I envisioned. Even though it is close to what I had in my mind, it is very highly possible that merely using it created the images in my mind. This process might result in more and more technology looking more dull and the same. Perhaps this website will end up being a relic of this strange time, a speculative capsule stuck in a weird, slopification automation void.</p>
+    </div>
+    <button class="disc-close" onclick="document.getElementById('ai-disclaimer').classList.remove('open')">✕ Close</button>
+  </div>
+</div>
+
+<script>
+const MODULES = [
+  { id:'01', title:'Computer History\n& Technology',  n:22, href:'module01.html' },
+  { id:'02', title:'Human / Self /\nIdentity / Body',  n:7,  href:'module02.html' },
+  { id:'03', title:'Information &\nCommunication',     n:7,  href:'module03.html' },
+  { id:'04', title:'Reality',                          n:7,  href:'module04.html' },
+  { id:'05', title:'Nature / Ecology\n/ Environment',  n:6,  href:'module05.html' },
+  { id:'06', title:'Self-Proposed',                    n:6,  href:'module06.html' },
+];
+
+function placeButtons() {
+  const wrap = document.getElementById('circle');
+  const size = wrap.offsetWidth;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r  = size * 0.36;
+
+  wrap.querySelectorAll('.mod-btn').forEach(el => el.remove());
+
+  MODULES.forEach((mod, i) => {
+    const angle = (i / MODULES.length) * 2 * Math.PI - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+
+    const a = document.createElement('a');
+    a.className = 'mod-btn';
+    a.href = mod.href;
+    a.style.left = x + 'px';
+    a.style.top  = y + 'px';
+
+    const lines = mod.title.split('\n');
+    a.innerHTML =
+      '<span class="mod-btn-num">Module ' + mod.id + '</span>' +
+      '<span class="mod-btn-title">' + lines[0] + (lines[1] ? '<br>' + lines[1] : '') + '</span>' +
+      '<span class="mod-btn-count">' + mod.n + ' artifact' + (mod.n!==1?'s':'') + '</span>';
+    wrap.appendChild(a);
+  });
+}
+
+placeButtons();
+window.addEventListener('resize', placeButtons);
+window.addEventListener('orientationchange', function(){ setTimeout(placeButtons, 200); });
+
+document.getElementById('ai-disclaimer').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('open');
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') document.getElementById('ai-disclaimer').classList.remove('open');
+});
+</script>
+</body>
+</html>
