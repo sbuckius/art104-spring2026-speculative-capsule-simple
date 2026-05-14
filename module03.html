@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Module 03 — Information & Communication — ART104</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #f5f2ed url('images/module03_background.png') center top / cover no-repeat fixed;
+    color: #111;
+    min-height: 100vh;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,242,237,0.94);
+    border-bottom: 1px solid #ccc;
+    padding: 0.75rem 1.5rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .nav-title { font-size: 0.9rem; font-weight: normal; letter-spacing: 0.04em; }
+  .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: baseline; }
+  .nav-links a {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #333; text-decoration: none; border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .nav-links a:hover { border-bottom-color: #333; }
+  .hero {
+    padding: 3rem 1.5rem 1.5rem;
+    background: rgba(245,242,237,0.7);
+  }
+  .hero-eyebrow {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #666; margin-bottom: 0.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    font-weight: normal; letter-spacing: -0.01em; margin-bottom: 0.4rem;
+  }
+  .hero-sub {
+    font-size: 0.9rem; font-style: italic; color: #555; margin-bottom: 0.3rem;
+  }
+  .hero-meta {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; color: #888;
+  }
+  .content {
+    padding: 2rem 1.5rem;
+    background: rgba(245,242,237,0.7);
+  }
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px;
+    margin-bottom: 2rem;
+  }
+  .img-grid-item {
+    aspect-ratio: 4/3; overflow: hidden; cursor: pointer;
+    background: #ddd; position: relative;
+  }
+  .img-grid-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.3s ease; filter: grayscale(15%);
+  }
+  .img-grid-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
+  .img-grid-item .img-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(245,242,237,0.88);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.55rem; letter-spacing: 0.08em;
+    padding: 0.3rem 0.4rem; line-height: 1.3;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .img-grid-item:hover .img-label { opacity: 1; }
+  .module-nav {
+    display: flex; justify-content: space-between;
+    border-top: 1px solid #ccc; padding-top: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .module-nav a {
+    color: #333; text-decoration: none; border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .module-nav a:hover { border-bottom-color: #333; }
+  footer {
+    background: rgba(245,242,237,0.9); border-top: 1px solid #ccc;
+    padding: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #888; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  #lightbox {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(10,8,5,0.92);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  #lightbox.open { display: flex; }
+  .lb-inner {
+    max-width: 820px; width: 100%;
+    display: flex; flex-direction: column;
+    background: #f5f2ed; max-height: 90vh; position: relative;
+  }
+  .lb-img-wrap {
+    flex-shrink: 0; max-height: 55vh; overflow: hidden; background: #ddd;
+  }
+  .lb-img-wrap img {
+    width: 100%; max-height: 55vh; object-fit: contain; display: block;
+  }
+  .lb-info {
+    padding: 1.2rem 1.5rem 1.5rem; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lb-eyebrow {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #888; margin-bottom: 0.5rem;
+  }
+  .lb-title { font-size: 1.2rem; font-weight: normal; margin-bottom: 0.4rem; }
+  .lb-artist { font-size: 0.85rem; font-style: italic; color: #555; margin-bottom: 0.8rem; }
+  .lb-desc { font-size: 0.85rem; line-height: 1.7; color: #333; margin-bottom: 1rem; }
+  .lb-module {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem; letter-spacing: 0.1em; color: #888;
+  }
+  .lb-close {
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(245,242,237,0.9); border: none; cursor: pointer;
+    padding: 0.3rem 0.6rem; color: #111;
+    transition: opacity 0.15s; z-index: 1;
+  }
+  .lb-close:hover { opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">Speculation Capsule</span>
+  <div class="nav-links">
+    <a href="index.html">← All Modules</a>
+    <a href="splash.html">Splash</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">ART104 · Spring 2026 · Module 03 · Active</p>
+  <h1>Information & Communication</h1>
+  <p class="hero-sub">Signal / noise / transmission / networks</p>
+  <p class="hero-meta">7 artifacts</p>
+</div>
+
+<div class="content">
+  <div class="img-grid" id="grid"></div>
+  <div class="module-nav">
+    <span><a href="module02.html">← Module 02</a></span>
+    <span><a href="module04.html">Module 04 →</a></span>
+  </div>
+</div>
+
+<footer>
+  <span>ART104 · Spring 2026</span>
+  <span>Module 03 of 06</span>
+</footer>
+
+<div id="lightbox">
+  <div class="lb-inner">
+    <button class="lb-close" id="lb-close-btn">✕ Close</button>
+    <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+    <div class="lb-info">
+      <p class="lb-eyebrow" id="lb-eyebrow"></p>
+      <h2 class="lb-title" id="lb-title"></h2>
+      <p class="lb-artist" id="lb-artist"></p>
+      <p class="lb-desc" id="lb-desc"></p>
+      <p class="lb-module" id="lb-module"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+const ARTIFACTS = [
+  {
+    img: 'images/info1.png',
+    title: 'Artifact 01',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info2.png',
+    title: 'Artifact 02',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info3.png',
+    title: 'Artifact 03',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info4.png',
+    title: 'Artifact 04',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info5.png',
+    title: 'Artifact 05',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info6.png',
+    title: 'Artifact 06',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  },
+  {
+    img: 'images/info7.png',
+    title: 'Artifact 07',
+    artist: 'Student Work',
+    desc: 'A speculative artifact from Module 03: Information & Communication.',
+    module: 'Module 03 · Information & Communication'
+  }
+];
+
+function openLightbox(a) {
+  document.getElementById('lb-img').src = a.img;
+  document.getElementById('lb-img').alt = a.title;
+  document.getElementById('lb-eyebrow').textContent = a.module;
+  document.getElementById('lb-title').textContent = a.title;
+  document.getElementById('lb-artist').textContent = a.artist;
+  document.getElementById('lb-desc').textContent = a.desc;
+  document.getElementById('lb-module').textContent = a.module;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+const grid = document.getElementById('grid');
+ARTIFACTS.forEach(a => {
+  const item = document.createElement('div');
+  item.className = 'img-grid-item';
+  item.innerHTML = `<img src="${a.img}" alt="${a.title}" loading="lazy"><div class="img-label">${a.title}</div>`;
+  item.addEventListener('click', () => openLightbox(a));
+  grid.appendChild(item);
+});
+
+document.getElementById('lb-close-btn').addEventListener('click', () =>
+  document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('open');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+});
+</script>
+</body>
+</html>
