@@ -8,14 +8,14 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: Georgia, 'Times New Roman', serif;
-    background: #f5f2ed url('images/index_background.png') center center / cover no-repeat fixed;
-    color: #111;
+    background: #111 url('images/index_background.png') center center / cover no-repeat fixed;
+    color: #fff;
     min-height: 100vh;
   }
   nav {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(245,242,237,0.94);
-    border-bottom: 1px solid #ccc;
+    background: rgba(10,10,10,0.92);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
     padding: 0.75rem 1.5rem;
     display: flex; align-items: baseline; justify-content: space-between;
     flex-wrap: wrap; gap: 0.5rem;
@@ -25,22 +25,22 @@
   .nav-links a, .nav-links button {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: #333; text-decoration: none; background: none; border: none;
+    color: #fff; text-decoration: none; background: none; border: none;
     border-bottom: 1px solid transparent; cursor: pointer;
     transition: border-color 0.15s; padding: 0;
   }
-  .nav-links a:hover, .nav-links button:hover { border-bottom-color: #333; }
+  .nav-links a:hover, .nav-links button:hover { border-bottom-color: #fff; }
   .page {
     min-height: calc(100vh - 44px);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    background: rgba(245,242,237,0.65);
+    background: rgba(0,0,0,0.45);
     padding: 2rem 1rem;
   }
   .page-eyebrow {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: #666; margin-bottom: 0.6rem; text-align: center;
+    color: rgba(255,255,255,0.6); margin-bottom: 0.6rem; text-align: center;
   }
   .page-title {
     font-size: clamp(1.8rem, 6vw, 3.5rem);
@@ -49,7 +49,7 @@
   }
   .page-meta {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.62rem; letter-spacing: 0.1em; color: #888;
+    font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
     margin-bottom: 3rem; text-align: center;
   }
   .circle-wrap {
@@ -75,12 +75,12 @@
     pointer-events: none;
   }
   .circle-center-count {
-    font-size: 1.6rem; font-weight: normal; color: #bbb; display: block; line-height: 1;
+    font-size: 1.6rem; font-weight: normal; color: rgba(255,255,255,0.25); display: block; line-height: 1;
   }
   .circle-center-label {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: #999; display: block; line-height: 1.6;
+    color: rgba(255,255,255,0.35); display: block; line-height: 1.6;
   }
   .mod-btn {
     position: absolute;
@@ -88,19 +88,19 @@
     width: clamp(100px, 24vw, 130px);
     text-align: center;
     text-decoration: none;
-    color: #111;
-    background: rgba(245,242,237,0.9);
-    border: 1px solid #bbb;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
     padding: 0.7rem 0.5rem;
     transition: background 0.2s, border-color 0.2s;
     -webkit-tap-highlight-color: transparent;
     display: block;
   }
-  .mod-btn:hover { background: rgba(255,255,255,1); border-color: #555; }
+  .mod-btn:hover { background: rgba(255,255,255,1); border-color: rgba(255,255,255,0.55); }
   .mod-btn-num {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: #888; display: block; margin-bottom: 0.3rem;
+    color: rgba(255,255,255,0.45); display: block; margin-bottom: 0.3rem;
   }
   .mod-btn-title {
     font-size: clamp(0.68rem, 2vw, 0.82rem);
@@ -108,14 +108,14 @@
   }
   .mod-btn-count {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.5rem; letter-spacing: 0.1em; color: #999; display: block;
+    font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); display: block;
   }
   footer {
-    background: rgba(245,242,237,0.9); border-top: 1px solid #ccc;
+    background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.15);
     padding: 1.2rem 1.5rem;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #888; display: flex; justify-content: space-between;
+    color: rgba(255,255,255,0.45); display: flex; justify-content: space-between;
     flex-wrap: wrap; gap: 0.5rem;
   }
   #ai-disclaimer {
@@ -126,26 +126,26 @@
   }
   #ai-disclaimer.open { display: flex; }
   .disc-inner {
-    max-width: 580px; width: 100%; background: #f5f2ed;
+    max-width: 580px; width: 100%; background: #111;
     padding: 2rem; max-height: 85vh; overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   .disc-label {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: #888; margin-bottom: 0.6rem;
+    color: rgba(255,255,255,0.45); margin-bottom: 0.6rem;
   }
   .disc-title {
     font-size: 1.2rem; font-weight: normal;
-    margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid #ccc;
+    margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.15);
   }
-  .disc-body p { font-size: 0.85rem; line-height: 1.75; color: #333; margin-bottom: 0.85rem; }
+  .disc-body p { font-size: 0.85rem; line-height: 1.75; color: #fff; margin-bottom: 0.85rem; }
   .disc-close {
     margin-top: 1.2rem;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    background: none; border: 1px solid #bbb; padding: 0.4rem 0.9rem;
-    cursor: pointer; color: #111; transition: opacity 0.15s;
+    background: none; border: 1px solid rgba(255,255,255,0.3); padding: 0.4rem 0.9rem;
+    cursor: pointer; color: #fff; transition: opacity 0.15s;
   }
   .disc-close:hover { opacity: 0.5; }
 </style>
