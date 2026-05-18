@@ -17,10 +17,12 @@
   html, body { min-height: 100vh; background: var(--void); color: var(--star); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 60% 50% at 10% 20%, rgba(var(--cr),0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 90% 80%, rgba(var(--cr),0.05) 0%, transparent 55%); pointer-events: none; z-index: 0; }
   body::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(var(--cr),0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--cr),0.025) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
+
   header { position: sticky; top: 0; z-index: 100; background: rgba(3,4,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(var(--cr),0.14); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
   .logo { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--star); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
   .logo-gem { width: 10px; height: 10px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 10px var(--c); }
   .header-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.22); }
+
   .mod-hero { position: relative; z-index: 1; padding: 3rem 2rem 2.5rem; border-bottom: 1px solid rgba(var(--cr),0.1); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; overflow: hidden; }
   .mod-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(var(--cr),0.06) 0%, transparent 60%); pointer-events: none; }
   .mod-eyebrow { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--c); opacity: 0.75; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -28,41 +30,47 @@
   .mod-title { font-weight: 700; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 0.9; color: var(--c); text-shadow: 0 0 40px rgba(var(--cr),0.3); }
   .mod-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,196,255,0.18); text-align: right; line-height: 2; white-space: nowrap; }
   .mod-count-big { font-weight: 700; font-size: 5.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(var(--cr),0.18); letter-spacing: -0.05em; display: block; }
+
   .nav-row { position: relative; z-index: 1; padding: 1rem 2rem 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid rgba(var(--cr),0.07); }
   .nav-btn { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--star); background: transparent; border: 1px solid rgba(var(--cr),0.3); padding: 0.42rem 1.1rem; text-decoration: none; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
   .nav-btn:hover { background: rgba(var(--cr),0.14); border-color: var(--c); color: #fff; }
+
   .main { position: relative; z-index: 1; padding: 2rem; }
   .section-label { font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(200,196,255,0.2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--cr),0.25), transparent); }
+
   .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: rgba(var(--cr),0.06); border: 1px solid rgba(var(--cr),0.06); }
-  .proj-card { background: var(--panel); cursor: pointer; position: relative; overflow: hidden; transition: background 0.2s; border: 1px solid rgba(var(--cr),0.07); }
-  .proj-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--c), transparent); opacity: 0.5; }
-  .proj-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top right, rgba(var(--cr),0.07) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; z-index: 1; }
+
+  .proj-card { background: var(--panel); position: relative; overflow: hidden; transition: background 0.2s; border: 1px solid rgba(var(--cr),0.07); }
   .proj-card:hover { background: #0d0b1e; border-color: rgba(var(--cr),0.35); }
-  .proj-card:hover::before { opacity: 1; }
   .proj-card:hover .card-img { transform: scale(1.04); filter: brightness(0.9) saturate(1.15); }
+
+  .card-img-btn { display: block; width: 100%; background: none; border: none; padding: 0; cursor: zoom-in; position: relative; overflow: hidden; }
   .card-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: brightness(0.68) saturate(0.7); transition: filter 0.3s, transform 0.4s; background: #0a0820; }
   .card-img-placeholder { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0b1e, #080614); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.2em; color: rgba(var(--cr),0.3); text-transform: uppercase; flex-direction: column; gap: 0.5rem; }
-  .card-label { padding: 0.6rem 0.7rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(var(--cr),0.08); position: relative; z-index: 2; }
-  .card-tag { font-family: 'Courier Prime', monospace; font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); opacity: 0.85; display: flex; align-items: center; gap: 0.35rem; }
-  .card-tag::before { content: ''; width: 4px; height: 4px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 5px var(--c); }
-  .card-open { font-family: 'Courier Prime', monospace; font-size: 0.46rem; letter-spacing: 0.12em; color: rgba(200,196,255,0.2); text-transform: uppercase; transition: color 0.2s; }
-  .proj-card:hover .card-open { color: var(--c); }
+  .card-expand-hint { position: absolute; bottom: 0.4rem; right: 0.4rem; font-family: 'Courier Prime', monospace; font-size: 0.42rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--star); background: rgba(3,4,10,0.8); border: 1px solid rgba(var(--cr),0.4); padding: 0.22rem 0.5rem; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+  .proj-card:hover .card-expand-hint { opacity: 1; }
 
-  /* ── Project detail modal (unchanged) ── */
+  .card-label { padding: 0.6rem 0.7rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(var(--cr),0.08); cursor: pointer; }
+  .card-label:hover { background: rgba(var(--cr),0.07); }
+  .card-tag { font-family: 'Courier Prime', monospace; font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); opacity: 0.85; display: flex; align-items: center; gap: 0.35rem; pointer-events: none; }
+  .card-tag::before { content: ''; width: 4px; height: 4px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 5px var(--c); }
+  .card-open { font-family: 'Courier Prime', monospace; font-size: 0.46rem; letter-spacing: 0.12em; color: rgba(200,196,255,0.25); text-transform: uppercase; pointer-events: none; }
+  .card-label:hover .card-open { color: var(--c); }
+
+  /* Detail modal */
   .modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(3,4,10,0.93); align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto; backdrop-filter: blur(10px); }
   .modal.open { display: flex; }
-  .modal-box { background: var(--panel); border: 1px solid rgba(var(--cr),0.22); width: 100%; max-width: 880px; position: relative; margin: auto; box-shadow: 0 0 80px rgba(var(--cr),0.1); }
+  .modal-box { background: var(--panel); border: 1px solid rgba(var(--cr),0.22); width: 100%; max-width: 880px; margin: auto; box-shadow: 0 0 80px rgba(var(--cr),0.1); }
   .modal-top-bar { height: 2px; background: linear-gradient(90deg, var(--c), #ff2d78, transparent); }
-  .modal-header { padding: 1rem 1.25rem 0.85rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(var(--cr),0.1); }
-  .modal-mod-id { font-family: 'Courier Prime', monospace; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.25em; color: var(--c); background: rgba(var(--cr),0.1); border: 1px solid rgba(var(--cr),0.25); padding: 0.2rem 0.55rem; display: flex; align-items: center; gap: 0.4rem; }
-  .modal-mod-id::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
-  .modal-title { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; color: var(--star); text-transform: uppercase; flex: 1; margin: 0 0.75rem; }
-  .modal-close { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; color: rgba(200,196,255,0.35); background: transparent; border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+  .modal-header { padding: 1rem 1.25rem 0.85rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; border-bottom: 1px solid rgba(var(--cr),0.1); }
+  .modal-mod-id { font-family: 'Courier Prime', monospace; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.25em; color: var(--c); background: rgba(var(--cr),0.1); border: 1px solid rgba(var(--cr),0.25); padding: 0.2rem 0.55rem; white-space: nowrap; }
+  .modal-title-text { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; color: var(--star); text-transform: uppercase; flex: 1; }
+  .modal-close { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; color: rgba(200,196,255,0.35); background: transparent; border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; }
   .modal-close:hover { color: #fff; border-color: rgba(200,196,255,0.4); }
-  .modal-img-wrap { position: relative; border-bottom: 1px solid rgba(var(--cr),0.1); background: #000; }
+  .modal-img-wrap { border-bottom: 1px solid rgba(var(--cr),0.1); background: #000; }
   .modal-img { width: 100%; max-height: 480px; display: block; object-fit: contain; }
-  .modal-img-placeholder { min-height: 200px; display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.22em; color: rgba(var(--cr),0.25); text-transform: uppercase; flex-direction: column; gap: 0.6rem; }
+  .modal-img-placeholder { min-height: 180px; display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.22em; color: rgba(var(--cr),0.25); text-transform: uppercase; }
   .modal-body { padding: 1.5rem 1.25rem; }
   .modal-body p { font-family: 'EB Garamond', serif; font-size: 0.95rem; line-height: 1.88; color: rgba(200,196,255,0.62); margin-bottom: 1rem; }
   .modal-body p:last-of-type { margin-bottom: 0; }
@@ -71,100 +79,27 @@
   .modal-link a { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.08em; color: var(--c); text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
   .modal-link a:hover { opacity: 1; }
 
-  /* ── Expand button on card image ── */
-  .card-img-wrap { position: relative; overflow: hidden; }
-  .card-expand-btn {
-    position: absolute; bottom: 0.4rem; right: 0.4rem;
-    font-family: 'Courier Prime', monospace; font-size: 0.44rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--star); background: rgba(3,4,10,0.75);
-    border: 1px solid rgba(var(--cr),0.4); padding: 0.25rem 0.55rem;
-    opacity: 0; transition: opacity 0.2s; z-index: 3; pointer-events: none;
-  }
-  .proj-card:hover .card-expand-btn { opacity: 1; }
-
-  /* ── Image / media lightbox ── */
-  .lightbox {
-    display: none; position: fixed; inset: 0; z-index: 2000;
-    background: rgba(3,4,10,0.97); backdrop-filter: blur(16px);
-    align-items: center; justify-content: center; padding: 1rem;
-    overflow-y: auto;
-  }
+  /* Media lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(3,4,10,0.97); backdrop-filter: blur(16px); align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto; }
   .lightbox.open { display: flex; }
-  .lightbox-inner {
-    width: 100%; max-width: 1040px; margin: auto;
-    border: 1px solid rgba(var(--cr),0.18);
-    background: var(--panel);
-    box-shadow: 0 0 100px rgba(var(--cr),0.08);
-  }
+  .lightbox-inner { width: 100%; max-width: 1040px; margin: auto; border: 1px solid rgba(var(--cr),0.18); background: var(--panel); }
   .lightbox-top-bar { height: 2px; background: linear-gradient(90deg, var(--c), rgba(var(--cr),0.3), transparent); }
-  .lightbox-header {
-    padding: 0.85rem 1.25rem;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid rgba(var(--cr),0.1);
-  }
-  .lightbox-id {
-    font-family: 'Courier Prime', monospace; font-size: 0.52rem;
-    letter-spacing: 0.22em; color: var(--c);
-    background: rgba(var(--cr),0.08); border: 1px solid rgba(var(--cr),0.22);
-    padding: 0.2rem 0.55rem; display: flex; align-items: center; gap: 0.4rem;
-  }
-  .lightbox-id::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
-  .lightbox-name {
-    font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 700;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--star);
-    flex: 1; margin: 0 0.75rem;
-  }
-  .lightbox-close {
-    font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em;
-    color: rgba(200,196,255,0.35); background: transparent;
-    border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem;
-    cursor: pointer; text-transform: uppercase; transition: all 0.2s;
-  }
+  .lightbox-header { padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; border-bottom: 1px solid rgba(var(--cr),0.1); }
+  .lightbox-id { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.22em; color: var(--c); background: rgba(var(--cr),0.08); border: 1px solid rgba(var(--cr),0.22); padding: 0.2rem 0.55rem; white-space: nowrap; }
+  .lightbox-name { font-family: 'Rajdhani', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--star); flex: 1; }
+  .lightbox-close { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; color: rgba(200,196,255,0.35); background: transparent; border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; white-space: nowrap; }
   .lightbox-close:hover { color: #fff; border-color: rgba(200,196,255,0.4); }
-  .lightbox-media {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px; background: rgba(var(--cr),0.06);
-  }
-  .lightbox-media.has-two { grid-template-columns: 1fr 1fr; }
-  .lightbox-media.has-three { grid-template-columns: 1fr 1fr 1fr; }
-  .media-slot {
-    background: #000; position: relative;
-    display: flex; align-items: center; justify-content: center;
-    min-height: 200px;
-  }
-  .media-slot img { width: 100%; height: 100%; max-height: 560px; object-fit: contain; display: block; }
-  .media-slot video { width: 100%; max-height: 560px; display: block; background: #000; }
-  .media-slot-label {
-    position: absolute; top: 0.5rem; left: 0.5rem;
-    font-family: 'Courier Prime', monospace; font-size: 0.44rem;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(200,196,255,0.4); background: rgba(3,4,10,0.6);
-    border: 1px solid rgba(var(--cr),0.18); padding: 0.15rem 0.45rem;
-    pointer-events: none;
-  }
-  .media-empty {
-    width: 100%; height: 100%; min-height: 200px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
-    font-family: 'Courier Prime', monospace; font-size: 0.5rem;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(var(--cr),0.2);
-  }
-  .lightbox-footer {
-    padding: 0.75rem 1.25rem; border-top: 1px solid rgba(var(--cr),0.08);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .lightbox-footer-info {
-    font-family: 'Courier Prime', monospace; font-size: 0.46rem;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(200,196,255,0.18);
-  }
-  .lightbox-detail-btn {
-    font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--c); background: transparent;
-    border: 1px solid rgba(var(--cr),0.35); padding: 0.35rem 1rem; cursor: pointer;
-    transition: all 0.2s; clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  }
+  .lightbox-media { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(var(--cr),0.06); }
+  .lightbox-media.cols-2 { grid-template-columns: 1fr 1fr; }
+  .lightbox-media.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .media-slot { background: #000; position: relative; display: flex; align-items: center; justify-content: center; min-height: 180px; }
+  .media-slot img { width: 100%; max-height: 520px; object-fit: contain; display: block; }
+  .media-slot video { width: 100%; max-height: 520px; display: block; }
+  .media-slot-label { position: absolute; top: 0.5rem; left: 0.5rem; font-family: 'Courier Prime', monospace; font-size: 0.44rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,196,255,0.5); background: rgba(3,4,10,0.7); border: 1px solid rgba(var(--cr),0.2); padding: 0.15rem 0.45rem; pointer-events: none; z-index: 2; }
+  .media-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(var(--cr),0.2); padding: 3rem; }
+  .lightbox-footer { padding: 0.75rem 1.25rem; border-top: 1px solid rgba(var(--cr),0.08); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .lightbox-footer-info { font-family: 'Courier Prime', monospace; font-size: 0.46rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,196,255,0.18); }
+  .lightbox-detail-btn { font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); background: transparent; border: 1px solid rgba(var(--cr),0.35); padding: 0.35rem 1rem; cursor: pointer; transition: all 0.2s; }
   .lightbox-detail-btn:hover { background: rgba(var(--cr),0.12); border-color: var(--c); }
 
   footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid rgba(var(--cr),0.08); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.12); }
@@ -203,21 +138,17 @@
 
 <footer>ART104 · Spring 2026 · MOD·06 · 06 Artifacts · Speculation Capsule</footer>
 
-<!-- Project detail modal -->
+<!-- Detail modal -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <div class="modal-top-bar"></div>
     <div class="modal-header">
       <span class="modal-mod-id" id="modal-mod-label">MOD·06</span>
-      <span class="modal-title" id="modal-title">Artifact 01</span>
-      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+      <span class="modal-title-text" id="modal-title">Artifact 01</span>
+      <button class="modal-close" id="modal-close-btn">✕ Close</button>
     </div>
-    <div class="modal-img-wrap" id="modal-img-wrap">
-      <div class="modal-img-placeholder"><span id="modal-img-label">image placeholder</span></div>
-    </div>
-    <div class="modal-body">
-      <div id="modal-text"></div>
-    </div>
+    <div class="modal-img-wrap" id="modal-img-wrap"></div>
+    <div class="modal-body"><div id="modal-text"></div></div>
   </div>
 </div>
 
@@ -228,7 +159,7 @@
     <div class="lightbox-header">
       <span class="lightbox-id" id="lb-id">MOD·06 / ART·01</span>
       <span class="lightbox-name" id="lb-name">Artifact</span>
-      <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+      <button class="lightbox-close" id="lb-close-btn">✕ Close</button>
     </div>
     <div class="lightbox-media" id="lb-media"></div>
     <div class="lightbox-footer">
@@ -239,205 +170,192 @@
 </div>
 
 <script>
-/*
-  To add media for each artifact, populate the `img`, `gif`, and/or `video` fields.
-  - img:   filename in images/   e.g. "self1.png"
-  - gif:   filename in images/   e.g. "self1.gif"
-  - video: filename in images/   e.g. "self1.mp4"   (also supports .webm)
-  
-  Any combination works: img only, img+gif, img+video, img+gif+video, etc.
-  The lightbox opens when the card image is clicked and shows all available media side by side.
-*/
-const moduleData = {
+// ── Data ──────────────────────────────────────────────────────────────────────
+// Fill in gif: and/or video: filenames (inside your images/ folder) for each artifact.
+// Leave as "" if you don't have that media yet.
+var moduleData = {
   "1": {
-    img: "self1.png",
-    gif: "",        // e.g. "self1.gif"
-    video: "",      // e.g. "self1.mp4"
+    img: "self1.png", gif: "", video: "",
     title: "Minh, Phin, Brianna, Ethan",
     p1: "The speculative artwork presents an adaptive exoskeleton that grows, self-repairs, and learns from its environment. The system acts as both life support and a learning engine, designed to sustain intelligence and push human limits. It connects to posthumanist ideas where consciousness expands through technology and experience moves beyond the physical body.",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   },
   "2": {
-    img: "self2.png",
-    gif: "",
-    video: "",
+    img: "self2.png", gif: "", video: "",
     title: "Emis, Chloe, Gab, Miah, Zhiyun",
     p1: "Fantasy Ecosystem Simulator is the title of a potential virtual reality game. The core aspect of the game is to build your own ecosystem from scratch with custom-made organisms and see how it turns out in real time.",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   },
   "3": {
-    img: "self3.png",
-    gif: "",
-    video: "",
+    img: "self3.png", gif: "", video: "",
     title: "Jo, Rosemarie, Christian, Rosa",
     p1: "Our speculative artwork, \"Synthetic Amphibian,\" explores this reality by visualizing a robot that uses self-repairing cycles, autonomous decision making, and environmental adaptation—acting as a primary defense mechanism for local ecosystems.",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   },
   "4": {
-    img: "self4.png",
-    gif: "",
-    video: "",
+    img: "self4.png", gif: "", video: "",
     title: "Catherine, Stella, David, Starr",
     p1: "We envision our speculative artwork, \"Creatures, Not Animals,\" as a large-scale installation that recreates a zoo environment filled with a myriad of eerie creatures. These creatures are the results of an experiment to recreate the evolutionary process using classic animals. As with many experiments, there have been complications…",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   },
   "5": {
-    img: "self5.png",
-    gif: "",
-    video: "",
+    img: "self5.png", gif: "", video: "",
     title: "Samantha, Ryan, David C., Tai",
     p1: "Our experiences in the real world influence our actions in video games. Yet video games allow us to discover new aspects of ourselves through a fictional, yet similar experience.",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   },
   "6": {
-    img: "self6.png",
-    gif: "",
-    video: "",
+    img: "self6.png", gif: "", video: "",
     title: "David P.",
-    p1: "My speculative artwork is called \"One Person In Many Coins,\" carrying four ideas as an expression of what the future of intercoupled connection to our own blood has in store for us. Once a user puts on a VR headset, they place one of their fingers onto a device wired to the VR system along with attachments at the shoulder, knees, and belt, creating a more physical experience. The goal of this art piece is to allow the user to experience different events of their ancestry. For example, if someone wants to see what life was like for their great-great-great-grandparent, the device allows them to witness that time era—not the grandparent themselves, but the environment, and how a version of themselves might have lived within it.",
+    p1: "My speculative artwork is called \"One Person In Many Coins,\" carrying four ideas as an expression of what the future of intercoupled connection to our own blood has in store for us. Once a user puts on a VR headset, they place one of their fingers onto a device wired to the VR system along with attachments at the shoulder, knees, and belt, creating a more physical experience.",
     link: "https://sbuckius.github.io/art104-spring2026-speculative-capsule/"
   }
 };
 
-/* ── Grid builder ── */
-function buildGrid() {
-  const grid = document.getElementById('grid');
-  Object.keys(moduleData).forEach(id => {
-    const d = moduleData[id];
-    const card = document.createElement('div');
-    card.className = 'proj-card';
-    const hasImg = !!d.img;
-    const imgEl = hasImg
-      ? `<img class="card-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      : '';
-    const placeholderStyle = hasImg ? 'display:none' : '';
-    card.innerHTML = `
-      <div class="card-img-wrap">
-        ${imgEl}
-        <div class="card-img-placeholder" style="${placeholderStyle}">
-          <span>ART·${String(id).padStart(2,'0')}</span>
-        </div>
-        <div class="card-expand-btn">⊞ Expand</div>
-      </div>
-      <div class="card-label">
-        <span class="card-tag">ART·${String(id).padStart(2,'0')}</span>
-        <span class="card-open">Open →</span>
-      </div>`;
+var activeLightboxId = null;
 
-    /* Clicking the image area → lightbox */
-    card.querySelector('.card-img-wrap').addEventListener('click', e => {
-      e.stopPropagation();
-      openLightbox(id);
-    });
-    /* Clicking elsewhere on card → detail modal */
-    card.querySelector('.card-label').addEventListener('click', () => openModal(id));
+// ── Build grid ────────────────────────────────────────────────────────────────
+function buildGrid() {
+  var grid = document.getElementById('grid');
+  Object.keys(moduleData).forEach(function(id) {
+    var d = moduleData[id];
+    var padId = String(id).padStart(2, '0');
+
+    var card = document.createElement('div');
+    card.className = 'proj-card';
+
+    // Image area → lightbox
+    var imgBtn = document.createElement('button');
+    imgBtn.className = 'card-img-btn';
+    imgBtn.type = 'button';
+
+    if (d.img) {
+      var img = document.createElement('img');
+      img.className = 'card-img';
+      img.src = 'images/' + d.img;
+      img.alt = 'Artifact ' + padId;
+      imgBtn.appendChild(img);
+    } else {
+      var ph = document.createElement('div');
+      ph.className = 'card-img-placeholder';
+      ph.innerHTML = '<span>ART·' + padId + '</span>';
+      imgBtn.appendChild(ph);
+    }
+
+    var hint = document.createElement('span');
+    hint.className = 'card-expand-hint';
+    hint.textContent = '⊞ Expand';
+    imgBtn.appendChild(hint);
+
+    imgBtn.onclick = function() { openLightbox(id); };
+    card.appendChild(imgBtn);
+
+    // Label bar → detail modal
+    var label = document.createElement('div');
+    label.className = 'card-label';
+    label.innerHTML = '<span class="card-tag">ART·' + padId + '</span><span class="card-open">Details →</span>';
+    label.onclick = function() { openModal(id); };
+    card.appendChild(label);
+
     grid.appendChild(card);
   });
 }
 
-/* ── Lightbox ── */
-let currentLightboxId = null;
-
+// ── Lightbox ──────────────────────────────────────────────────────────────────
 function openLightbox(id) {
-  const d = moduleData[id];
-  const padId = String(id).padStart(2,'0');
-  currentLightboxId = id;
+  var d = moduleData[id];
+  var padId = String(id).padStart(2, '0');
+  activeLightboxId = id;
 
-  document.getElementById('lb-id').textContent = `MOD·06 / ART·${padId}`;
-  document.getElementById('lb-name').textContent = d.title || `Artifact ${padId}`;
-  document.getElementById('lb-footer-info').textContent = `MOD·06 · ART·${padId} · Spring 2026`;
+  document.getElementById('lb-id').textContent = 'MOD·06 / ART·' + padId;
+  document.getElementById('lb-name').textContent = d.title || 'Artifact ' + padId;
+  document.getElementById('lb-footer-info').textContent = 'MOD·06 · ART·' + padId + ' · Spring 2026';
 
-  const slots = [];
-  if (d.img)   slots.push({ type: 'img',   src: `images/${d.img}`,   label: 'Still' });
-  if (d.gif)   slots.push({ type: 'gif',   src: `images/${d.gif}`,   label: 'Animated' });
-  if (d.video) slots.push({ type: 'video', src: `images/${d.video}`, label: 'Video' });
+  var slots = [];
+  if (d.img)   slots.push({ type: 'img',   src: 'images/' + d.img,   label: 'Still' });
+  if (d.gif)   slots.push({ type: 'gif',   src: 'images/' + d.gif,   label: 'Animated' });
+  if (d.video) slots.push({ type: 'video', src: 'images/' + d.video, label: 'Video' });
 
-  const mediaEl = document.getElementById('lb-media');
-  mediaEl.className = 'lightbox-media';
-  if (slots.length === 2) mediaEl.classList.add('has-two');
-  if (slots.length >= 3)  mediaEl.classList.add('has-three');
+  var media = document.getElementById('lb-media');
+  media.className = 'lightbox-media';
+  if (slots.length === 2) media.classList.add('cols-2');
+  if (slots.length >= 3)  media.classList.add('cols-3');
 
   if (slots.length === 0) {
-    mediaEl.innerHTML = `<div class="media-slot"><div class="media-empty"><span>◈</span><span>No media available</span></div></div>`;
+    media.innerHTML = '<div class="media-slot"><div class="media-empty"><span>◈</span><span>No media yet</span></div></div>';
   } else {
-    mediaEl.innerHTML = slots.map(s => {
-      if (s.type === 'img' || s.type === 'gif') {
-        return `<div class="media-slot">
-          <span class="media-slot-label">${s.label}</span>
-          <img src="${s.src}" alt="${s.label}" onerror="this.parentElement.innerHTML='<div class=media-empty><span>◈</span><span>${s.src}</span></div>'">
-        </div>`;
-      } else {
-        const ext = s.src.split('.').pop().toLowerCase();
-        const mime = ext === 'webm' ? 'video/webm' : 'video/mp4';
-        return `<div class="media-slot">
-          <span class="media-slot-label">${s.label}</span>
-          <video controls autoplay muted loop playsinline>
-            <source src="${s.src}" type="${mime}">
-            Your browser does not support video.
-          </video>
-        </div>`;
+    media.innerHTML = slots.map(function(s) {
+      var lbl = '<span class="media-slot-label">' + s.label + '</span>';
+      if (s.type === 'video') {
+        var ext = s.src.split('.').pop().toLowerCase();
+        var mime = ext === 'webm' ? 'video/webm' : 'video/mp4';
+        return '<div class="media-slot">' + lbl + '<video controls autoplay muted loop playsinline><source src="' + s.src + '" type="' + mime + '"></video></div>';
       }
+      return '<div class="media-slot">' + lbl + '<img src="' + s.src + '" alt="' + s.label + '"></div>';
     }).join('');
   }
 
-  document.getElementById('lightbox').classList.add('open');
-  document.getElementById('lightbox').scrollTop = 0;
+  var lb = document.getElementById('lightbox');
+  lb.classList.add('open');
+  lb.scrollTop = 0;
 }
 
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  /* Pause any playing videos */
-  document.querySelectorAll('#lb-media video').forEach(v => v.pause());
-  currentLightboxId = null;
+  var lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  lb.querySelectorAll('video').forEach(function(v) { v.pause(); });
+  activeLightboxId = null;
 }
 
-/* "View Details" button inside lightbox → opens detail modal */
-document.getElementById('lb-detail-btn').addEventListener('click', () => {
-  if (currentLightboxId) {
-    closeLightbox();
-    openModal(currentLightboxId);
-  }
-});
-
-document.getElementById('lightbox').addEventListener('click', e => {
-  if (e.target === document.getElementById('lightbox')) closeLightbox();
-});
-
-/* ── Detail modal ── */
+// ── Detail modal ──────────────────────────────────────────────────────────────
 function openModal(id) {
-  const d = moduleData[id];
-  const padId = String(id).padStart(2,'0');
-  document.getElementById('modal-mod-label').textContent = `MOD·06 / ART·${padId}`;
-  document.getElementById('modal-title').textContent = d.title || `Artifact ${padId}`;
+  var d = moduleData[id];
+  var padId = String(id).padStart(2, '0');
 
-  const wrap = document.getElementById('modal-img-wrap');
-  if (d.img) {
-    wrap.innerHTML = `<img class="modal-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.outerHTML='<div class=modal-img-placeholder><span>image: ${d.img}</span></div>'">`;
-  } else {
-    wrap.innerHTML = `<div class="modal-img-placeholder"><span>image placeholder — ART·${padId}</span></div>`;
-  }
+  document.getElementById('modal-mod-label').textContent = 'MOD·06 / ART·' + padId;
+  document.getElementById('modal-title').textContent = d.title || 'Artifact ' + padId;
 
-  const linkHTML = d.link ? `
-    <div class="modal-link">
-      <div class="link-label">◈ Link</div>
-      <a href="${d.link}" target="_blank" rel="noopener">↗ ${d.link}</a>
-    </div>` : '';
+  var wrap = document.getElementById('modal-img-wrap');
+  wrap.innerHTML = d.img
+    ? '<img class="modal-img" src="images/' + d.img + '" alt="artifact ' + padId + '">'
+    : '<div class="modal-img-placeholder">image placeholder — ART·' + padId + '</div>';
 
-  document.getElementById('modal-text').innerHTML = `
-    <p>${d.p1}</p>
-    ${d.p2 ? `<p>${d.p2}</p>` : ''}
-    ${linkHTML}`;
+  var linkHTML = d.link
+    ? '<div class="modal-link"><div class="link-label">◈ Link</div><a href="' + d.link + '" target="_blank" rel="noopener">↗ ' + d.link + '</a></div>'
+    : '';
 
-  document.getElementById('modal').classList.add('open');
-  document.getElementById('modal').scrollTop = 0;
+  document.getElementById('modal-text').innerHTML =
+    '<p>' + d.p1 + '</p>' +
+    (d.p2 ? '<p>' + d.p2 + '</p>' : '') +
+    linkHTML;
+
+  var m = document.getElementById('modal');
+  m.classList.add('open');
+  m.scrollTop = 0;
 }
 
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal')) closeModal();
-});
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
 
-document.addEventListener('keydown', e => {
+// ── Button listeners ──────────────────────────────────────────────────────────
+document.getElementById('modal-close-btn').onclick = closeModal;
+document.getElementById('lb-close-btn').onclick = closeLightbox;
+
+document.getElementById('lb-detail-btn').onclick = function() {
+  var id = activeLightboxId;
+  closeLightbox();
+  if (id) openModal(id);
+};
+
+document.getElementById('modal').onclick = function(e) {
+  if (e.target === this) closeModal();
+};
+document.getElementById('lightbox').onclick = function(e) {
+  if (e.target === this) closeLightbox();
+};
+
+document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeLightbox(); closeModal(); }
 });
 
