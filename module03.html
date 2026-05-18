@@ -2,269 +2,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Module 03 — Information & Communication — ART104</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOD·03 // Information & Communication — Speculation Capsule</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: #111 url('images/module03_background.png') center top / cover no-repeat fixed;
-    color: #fff;
-    min-height: 100vh;
+  :root {
+    --void: #03040a;
+    --c: #00ffb3;
+    --cr: 0,255,179;
+    --star: #c8c4ff;
+    --panel: #080614;
   }
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(10,10,10,0.92);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding: 0.75rem 1.5rem;
-    display: flex; align-items: baseline; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.5rem;
-  }
-  .nav-title { font-size: 0.9rem; font-weight: normal; letter-spacing: 0.04em; }
-  .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: baseline; }
-  .nav-links a {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: #fff; text-decoration: none; border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .nav-links a:hover { border-bottom-color: #fff; }
-  .hero {
-    padding: 3rem 1.5rem 1.5rem;
-    background: rgba(0,0,0,0.45);
-  }
-  .hero-eyebrow {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;
-  }
-  .hero h1 {
-    font-size: clamp(1.6rem, 5vw, 3rem);
-    font-weight: normal; letter-spacing: -0.01em; margin-bottom: 0.4rem;
-  }
-  .hero-sub {
-    font-size: 0.9rem; font-style: italic; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem;
-  }
-  .hero-meta {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
-  }
-  .content {
-    padding: 2rem 1.5rem;
-    background: rgba(0,0,0,0.45);
-  }
-  .img-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 6px;
-    margin-bottom: 2rem;
-  }
-  .img-grid-item {
-    aspect-ratio: 4/3; overflow: hidden; cursor: pointer;
-    background: #ddd; position: relative;
-  }
-  .img-grid-item img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.3s ease; filter: grayscale(15%);
-  }
-  .img-grid-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
-  .img-grid-item .img-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(0,0,0,0.7);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.55rem; letter-spacing: 0.08em;
-    padding: 0.3rem 0.4rem; line-height: 1.3;
-    opacity: 0; transition: opacity 0.2s;
-  }
-  .img-grid-item:hover .img-label { opacity: 1; }
-  .module-nav {
-    display: flex; justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.2rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  }
-  .module-nav a {
-    color: #fff; text-decoration: none; border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .module-nav a:hover { border-bottom-color: #fff; }
-  footer {
-    background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.15);
-    padding: 1.5rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); display: flex; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.5rem;
-  }
-  #lightbox {
-    display: none; position: fixed; inset: 0; z-index: 200;
-    background: rgba(10,8,5,0.92);
-    align-items: center; justify-content: center; padding: 1rem;
-  }
-  #lightbox.open { display: flex; }
-  .lb-inner {
-    max-width: 820px; width: 100%;
-    display: flex; flex-direction: column;
-    background: #111; max-height: 90vh; position: relative;
-  }
-  .lb-img-wrap {
-    flex-shrink: 0; max-height: 55vh; overflow: hidden; background: #ddd;
-  }
-  .lb-img-wrap img {
-    width: 100%; max-height: 55vh; object-fit: contain; display: block;
-  }
-  .lb-info {
-    padding: 1.2rem 1.5rem 1.5rem; overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .lb-eyebrow {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); margin-bottom: 0.5rem;
-  }
-  .lb-title { font-size: 1.2rem; font-weight: normal; margin-bottom: 0.4rem; }
-  .lb-artist { font-size: 0.85rem; font-style: italic; color: rgba(255,255,255,0.55); margin-bottom: 0.8rem; }
-  .lb-desc { font-size: 0.85rem; line-height: 1.7; color: #fff; margin-bottom: 1rem; }
-  .lb-module {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
-  }
-  .lb-close {
-    position: absolute; top: 0.75rem; right: 0.75rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    background: rgba(0,0,0,0.5); border: none; cursor: pointer;
-    padding: 0.3rem 0.6rem; color: #fff;
-    transition: opacity 0.15s; z-index: 1;
-  }
-  .lb-close:hover { opacity: 0.5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100vh; background: var(--void); color: var(--star); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 60% 50% at 10% 20%, rgba(var(--cr),0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 90% 80%, rgba(var(--cr),0.05) 0%, transparent 55%); pointer-events: none; z-index: 0; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(var(--cr),0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--cr),0.025) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
+  header { position: sticky; top: 0; z-index: 100; background: rgba(3,4,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(var(--cr),0.14); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--star); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
+  .logo-gem { width: 10px; height: 10px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 10px var(--c); }
+  .header-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.22); }
+  .mod-hero { position: relative; z-index: 1; padding: 3rem 2rem 2.5rem; border-bottom: 1px solid rgba(var(--cr),0.1); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; overflow: hidden; }
+  .mod-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(var(--cr),0.06) 0%, transparent 60%); pointer-events: none; }
+  .mod-eyebrow { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--c); opacity: 0.75; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .mod-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
+  .mod-title { font-weight: 700; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 0.9; color: var(--c); text-shadow: 0 0 40px rgba(var(--cr),0.3); }
+  .mod-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,196,255,0.18); text-align: right; line-height: 2; white-space: nowrap; }
+  .mod-count-big { font-weight: 700; font-size: 5.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(var(--cr),0.18); letter-spacing: -0.05em; display: block; }
+  .nav-row { position: relative; z-index: 1; padding: 1rem 2rem 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid rgba(var(--cr),0.07); }
+  .nav-btn { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--star); background: transparent; border: 1px solid rgba(var(--cr),0.3); padding: 0.42rem 1.1rem; text-decoration: none; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+  .nav-btn:hover { background: rgba(var(--cr),0.14); border-color: var(--c); color: #fff; }
+  .main { position: relative; z-index: 1; padding: 2rem; }
+  .section-label { font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(200,196,255,0.2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--cr),0.25), transparent); }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: rgba(var(--cr),0.06); border: 1px solid rgba(var(--cr),0.06); }
+  .proj-card { background: var(--panel); cursor: pointer; position: relative; overflow: hidden; transition: background 0.2s; border: 1px solid rgba(var(--cr),0.07); }
+  .proj-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--c), transparent); opacity: 0.5; }
+  .proj-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top right, rgba(var(--cr),0.07) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; z-index: 1; }
+  .proj-card:hover { background: #0d0b1e; border-color: rgba(var(--cr),0.35); }
+  .proj-card:hover::before { opacity: 1; }
+  .proj-card:hover .card-img { transform: scale(1.04); filter: brightness(0.9) saturate(1.15); }
+  .card-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: brightness(0.68) saturate(0.7); transition: filter 0.3s, transform 0.4s; background: #0a0820; }
+  .card-img-placeholder { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0b1e, #080614); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.2em; color: rgba(var(--cr),0.3); text-transform: uppercase; flex-direction: column; gap: 0.5rem; }
+  .card-label { padding: 0.6rem 0.7rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(var(--cr),0.08); position: relative; z-index: 2; }
+  .card-tag { font-family: 'Courier Prime', monospace; font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); opacity: 0.85; display: flex; align-items: center; gap: 0.35rem; }
+  .card-tag::before { content: ''; width: 4px; height: 4px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 5px var(--c); }
+  .card-open { font-family: 'Courier Prime', monospace; font-size: 0.46rem; letter-spacing: 0.12em; color: rgba(200,196,255,0.2); text-transform: uppercase; transition: color 0.2s; }
+  .proj-card:hover .card-open { color: var(--c); }
+  .modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(3,4,10,0.93); align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto; backdrop-filter: blur(10px); }
+  .modal.open { display: flex; }
+  .modal-box { background: var(--panel); border: 1px solid rgba(var(--cr),0.22); width: 100%; max-width: 880px; position: relative; margin: auto; box-shadow: 0 0 80px rgba(var(--cr),0.1); }
+  .modal-top-bar { height: 2px; background: linear-gradient(90deg, var(--c), #ff2d78, transparent); }
+  .modal-header { padding: 1rem 1.25rem 0.85rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(var(--cr),0.1); }
+  .modal-mod-id { font-family: 'Courier Prime', monospace; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.25em; color: var(--c); background: rgba(var(--cr),0.1); border: 1px solid rgba(var(--cr),0.25); padding: 0.2rem 0.55rem; display: flex; align-items: center; gap: 0.4rem; }
+  .modal-mod-id::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
+  .modal-title { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; color: var(--star); text-transform: uppercase; flex: 1; margin: 0 0.75rem; }
+  .modal-close { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; color: rgba(200,196,255,0.35); background: transparent; border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+  .modal-close:hover { color: #fff; border-color: rgba(200,196,255,0.4); }
+  .modal-img-wrap { position: relative; border-bottom: 1px solid rgba(var(--cr),0.1); background: #000; }
+  .modal-img { width: 100%; max-height: 480px; display: block; object-fit: contain; }
+  .modal-img-placeholder { min-height: 200px; display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.22em; color: rgba(var(--cr),0.25); text-transform: uppercase; flex-direction: column; gap: 0.6rem; }
+  .modal-body { padding: 1.5rem 1.25rem; }
+  .modal-body p { font-family: 'EB Garamond', serif; font-size: 0.95rem; line-height: 1.88; color: rgba(200,196,255,0.62); margin-bottom: 1rem; }
+  .modal-body p:last-of-type { margin-bottom: 0; }
+  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid rgba(var(--cr),0.08); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.12); }
 </style>
 </head>
 <body>
 
-<nav>
-  <span class="nav-title">Speculation Capsule</span>
-  <div class="nav-links">
-    <a href="index.html">← All Modules</a>
-    <a href="splash.html">Splash</a>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-gem"></div>
+    Speculation Capsule
+  </a>
+  <div class="header-right">ART104 · Spring 2026 · MOD·03</div>
+</header>
+
+<div class="mod-hero">
+  <div>
+    <div class="mod-eyebrow">module 03 · signal · noise · transmission · networks</div>
+    <h1 class="mod-title">Information &amp;<br>Communication</h1>
   </div>
-</nav>
-
-<div class="hero">
-  <p class="hero-eyebrow">ART104 · Spring 2026 · Module 03 · Active</p>
-  <h1>Information & Communication</h1>
-  <p class="hero-sub">Signal / noise / transmission / networks</p>
-  <p class="hero-meta">7 artifacts</p>
-</div>
-
-<div class="content">
-  <div class="img-grid" id="grid"></div>
-  <div class="module-nav">
-    <span><a href="module02.html">← Module 02</a></span>
-    <span><a href="module04.html">Module 04 →</a></span>
+  <div class="mod-right">
+    <span class="mod-count-big">07</span>
+    07 artifacts<br>Spring 2026
   </div>
 </div>
 
-<footer>
-  <span>ART104 · Spring 2026</span>
-  <span>Module 03 of 06</span>
-</footer>
+<div class="nav-row">
+  <a href="module02.html" class="nav-btn">← Module 02</a>
+  <a href="module04.html" class="nav-btn">Module 04 →</a>
+</div>
 
-<div id="lightbox">
-  <div class="lb-inner">
-    <button class="lb-close" id="lb-close-btn">✕ Close</button>
-    <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
-    <div class="lb-info">
-      <p class="lb-eyebrow" id="lb-eyebrow"></p>
-      <h2 class="lb-title" id="lb-title"></h2>
-      <p class="lb-artist" id="lb-artist"></p>
-      <p class="lb-desc" id="lb-desc"></p>
-      <p class="lb-module" id="lb-module"></p>
+<main class="main">
+  <div class="section-label">7 artifacts · information &amp; communication</div>
+  <div class="project-grid" id="grid"></div>
+</main>
+
+<footer>ART104 · Spring 2026 · MOD·03 · 07 Artifacts · Speculation Capsule</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-top-bar"></div>
+    <div class="modal-header">
+      <span class="modal-mod-id" id="modal-mod-label">MOD·03</span>
+      <span class="modal-title" id="modal-title">Artifact 01</span>
+      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+    </div>
+    <div class="modal-img-wrap" id="modal-img-wrap">
+      <div class="modal-img-placeholder"><span id="modal-img-label">image placeholder</span></div>
+    </div>
+    <div class="modal-body">
+      <div id="modal-text"></div>
     </div>
   </div>
 </div>
 
 <script>
-const ARTIFACTS = [
-  {
-    img: 'images/info1.png',
-    title: 'Artifact 01',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+const moduleData = {
+  "1": {
+    img: "info1.png",
+    title: "Tai, Miah, Ethan",
+    p1: "Our project app concept is called Attention Tracker. The idea is that the app tracks how much time a person spends on their phone and shows where their attention is going throughout the week. It reflects the theme of information and communication because smartphones constantly collect information and communicate data about how we spend our time on them. In the attention economy, companies compete to capture and keep our attention through notifications, social media feeds, and algorithms."
   },
-  {
-    img: 'images/info2.png',
-    title: 'Artifact 02',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "2": {
+    img: "info2.png",
+    title: "Gab, Phin, Emis",
+    p1: "In REC, we use digital collage and compositing techniques that combine photography, illustration, and graphic elements, created in Procreate. By layering scanned textures, silhouettes, and photographic material, we construct a dense visual environment where natural imagery merges with technological symbolism. Digital color manipulation and transparency help create an atmospheric space, while red dots appear throughout the composition as visual data points that suggest recording systems, surveillance signals, or networked tracking embedded within the landscape.",
+    p2: "Through this work, we explore themes of surveillance capitalism, constant monitoring, and the transformation of human identity into data within digital systems. The limited color palette of black, gray, red, and cyan emphasizes contrast and evokes digital interfaces and recording indicators. Organic forms like tree branches and roots mirror the structure of technological networks, while simplified human silhouettes suggest anonymity in data-driven environments.",
+    p3: "By combining natural imagery with digital symbolism through a layered collage aesthetic, we reflect on how hidden infrastructures of data collection shape perception, visibility, and identity in contemporary networked society."
   },
-  {
-    img: 'images/info3.png',
-    title: 'Artifact 03',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "3": {
+    img: "info3.png",
+    title: "David P., Rosalva, Minh",
+    p1: "Screens started looking back at us, turning our private lives into trackable, operational data."
   },
-  {
-    img: 'images/info4.png',
-    title: 'Artifact 04',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "4": {
+    img: "info4.png",
+    title: "Christian, Chloe, Samantha",
+    p1: "Our speculative artwork is the Ocular V.3 system — an implanted eye prosthetic that feeds you advertisements for products you look at in real time.",
+    p2: "The system must replace a working eye in order to function, as it still requires the eye's functioning nerves at the moment of removal. In this world, it was designed to constantly sell products to you by using data taken from what you're seeing.",
+    p3: "Pros: better vision than everyone, the ability to get the best deal in an instant, and seeing the world from a new perspective. Cons: complete loss of privacy, all everyday activities recorded, and the requirement to replace an original eye."
   },
-  {
-    img: 'images/info5.png',
-    title: 'Artifact 05',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "5": {
+    img: "info5.png",
+    title: "Catherine, Stella, David",
+    p1: "Our final artwork, The Blind Follower, is a culmination of all of our ideas to tell a story of mass miscommunication. It illustrates the religious-like blind faith we hold in the information we are fed by our devices. The sci-fi-esque glasses take this idea to its technological extreme, making our tech and its abundant misinformation the only thing we can see. The information in question is a dramatized version of the advertisements, fake news, and propaganda we are constantly exposed to."
   },
-  {
-    img: 'images/info6.png',
-    title: 'Artifact 06',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "6": {
+    img: "info6.png",
+    title: "David, Rosemarie, Jo, Brianna",
+    p1: "This work reflects ideas important to the theme of information and communication because it depicts what it could look like if AI decided to take over and lock you out of the internet—more specifically, how AI would turn the internet into a social media platform where it could freely interact with itself.",
+    p2: "As people, we have specific platforms where we can socialize, create content, and share content. If there were a day when AI could completely take over the internet and turn it into its own social media playground, it would have the power to determine what is relevant, set the topic of conversation, and decide if anything crashes or thrives.",
+    p3: "Humans would only be able to witness their activity, and for the first time, they would be completely powerless."
   },
-  {
-    img: 'images/info7.png',
-    title: 'Artifact 07',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 03: Information & Communication.',
-    module: 'Module 03 · Information & Communication'
+  "7": {
+    img: "info7.png",
+    title: "Ryan, Starr, Zhiyun",
+    p1: "Concept for a media site that adapts the content of its articles—headlines, images, text—to fit its users' beliefs. If two people clicked on the exact same link, both would find several differences in how the news article reported on the issue.",
+    p2: "This is meant to address fake news and misinformation spread using data surveillance. Political and social bias in news and other forms of communication can distort the truth, causing viewers to form more extreme, radical beliefs."
   }
-];
+};
 
-function openLightbox(a) {
-  document.getElementById('lb-img').src = a.img;
-  document.getElementById('lb-img').alt = a.title;
-  document.getElementById('lb-eyebrow').textContent = a.module;
-  document.getElementById('lb-title').textContent = a.title;
-  document.getElementById('lb-artist').textContent = a.artist;
-  document.getElementById('lb-desc').textContent = a.desc;
-  document.getElementById('lb-module').textContent = a.module;
-  document.getElementById('lightbox').classList.add('open');
+function buildGrid() {
+  const grid = document.getElementById('grid');
+  Object.keys(moduleData).forEach(id => {
+    const d = moduleData[id];
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+    const imgEl = d.img ? `<img class="card-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : '';
+    const placeholderStyle = d.img ? 'display:none' : '';
+    card.innerHTML = `
+      ${imgEl}
+      <div class="card-img-placeholder" style="${placeholderStyle}">
+        <span>ART·${String(id).padStart(2,'0')}</span>
+      </div>
+      <div class="card-label">
+        <span class="card-tag">ART·${String(id).padStart(2,'0')}</span>
+        <span class="card-open">Open →</span>
+      </div>`;
+    card.addEventListener('click', () => openModal(id));
+    grid.appendChild(card);
+  });
 }
 
-const grid = document.getElementById('grid');
-ARTIFACTS.forEach(a => {
-  const item = document.createElement('div');
-  item.className = 'img-grid-item';
-  item.innerHTML = `<img src="${a.img}" alt="${a.title}" loading="lazy"><div class="img-label">${a.title}</div>`;
-  item.addEventListener('click', () => openLightbox(a));
-  grid.appendChild(item);
-});
+function openModal(id) {
+  const d = moduleData[id];
+  const padId = String(id).padStart(2,'0');
+  document.getElementById('modal-mod-label').textContent = `MOD·03 / ART·${padId}`;
+  document.getElementById('modal-title').textContent = d.title || `Artifact ${padId}`;
 
-document.getElementById('lb-close-btn').addEventListener('click', () =>
-  document.getElementById('lightbox').classList.remove('open'));
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('open');
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
-});
+  const wrap = document.getElementById('modal-img-wrap');
+  if (d.img) {
+    wrap.innerHTML = `<img class="modal-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.outerHTML='<div class=modal-img-placeholder><span>image: ${d.img}</span></div>'">`;
+  } else {
+    wrap.innerHTML = `<div class="modal-img-placeholder"><span>image placeholder — ART·${padId}</span></div>`;
+  }
+
+  document.getElementById('modal-text').innerHTML = `
+    <p>${d.p1}</p>
+    ${d.p2 ? `<p>${d.p2}</p>` : ''}
+    ${d.p3 ? `<p>${d.p3}</p>` : ''}`;
+
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modal').scrollTop = 0;
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+buildGrid();
 </script>
 </body>
 </html>

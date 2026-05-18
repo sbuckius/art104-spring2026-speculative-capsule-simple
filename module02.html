@@ -2,269 +2,237 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Module 02 — Human / Self / Identity / Body — ART104</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOD·02 // Human / Self / Identity / Body — Speculation Capsule</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: #111 url('images/module02_background.png') center top / cover no-repeat fixed;
-    color: #fff;
-    min-height: 100vh;
+  :root {
+    --void: #03040a;
+    --c: #ff6eb4;
+    --cr: 255,110,180;
+    --star: #c8c4ff;
+    --panel: #080614;
   }
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(10,10,10,0.92);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding: 0.75rem 1.5rem;
-    display: flex; align-items: baseline; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.5rem;
-  }
-  .nav-title { font-size: 0.9rem; font-weight: normal; letter-spacing: 0.04em; }
-  .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: baseline; }
-  .nav-links a {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: #fff; text-decoration: none; border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .nav-links a:hover { border-bottom-color: #fff; }
-  .hero {
-    padding: 3rem 1.5rem 1.5rem;
-    background: rgba(0,0,0,0.45);
-  }
-  .hero-eyebrow {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255,255,255,0.6); margin-bottom: 0.5rem;
-  }
-  .hero h1 {
-    font-size: clamp(1.6rem, 5vw, 3rem);
-    font-weight: normal; letter-spacing: -0.01em; margin-bottom: 0.4rem;
-  }
-  .hero-sub {
-    font-size: 0.9rem; font-style: italic; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem;
-  }
-  .hero-meta {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
-  }
-  .content {
-    padding: 2rem 1.5rem;
-    background: rgba(0,0,0,0.45);
-  }
-  .img-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 6px;
-    margin-bottom: 2rem;
-  }
-  .img-grid-item {
-    aspect-ratio: 4/3; overflow: hidden; cursor: pointer;
-    background: #ddd; position: relative;
-  }
-  .img-grid-item img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.3s ease; filter: grayscale(15%);
-  }
-  .img-grid-item:hover img { transform: scale(1.04); filter: grayscale(0%); }
-  .img-grid-item .img-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(0,0,0,0.7);
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.55rem; letter-spacing: 0.08em;
-    padding: 0.3rem 0.4rem; line-height: 1.3;
-    opacity: 0; transition: opacity 0.2s;
-  }
-  .img-grid-item:hover .img-label { opacity: 1; }
-  .module-nav {
-    display: flex; justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.2rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-  }
-  .module-nav a {
-    color: #fff; text-decoration: none; border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .module-nav a:hover { border-bottom-color: #fff; }
-  footer {
-    background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.15);
-    padding: 1.5rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); display: flex; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.5rem;
-  }
-  #lightbox {
-    display: none; position: fixed; inset: 0; z-index: 200;
-    background: rgba(10,8,5,0.92);
-    align-items: center; justify-content: center; padding: 1rem;
-  }
-  #lightbox.open { display: flex; }
-  .lb-inner {
-    max-width: 820px; width: 100%;
-    display: flex; flex-direction: column;
-    background: #111; max-height: 90vh; position: relative;
-  }
-  .lb-img-wrap {
-    flex-shrink: 0; max-height: 55vh; overflow: hidden; background: #ddd;
-  }
-  .lb-img-wrap img {
-    width: 100%; max-height: 55vh; object-fit: contain; display: block;
-  }
-  .lb-info {
-    padding: 1.2rem 1.5rem 1.5rem; overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .lb-eyebrow {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); margin-bottom: 0.5rem;
-  }
-  .lb-title { font-size: 1.2rem; font-weight: normal; margin-bottom: 0.4rem; }
-  .lb-artist { font-size: 0.85rem; font-style: italic; color: rgba(255,255,255,0.55); margin-bottom: 0.8rem; }
-  .lb-desc { font-size: 0.85rem; line-height: 1.7; color: #fff; margin-bottom: 1rem; }
-  .lb-module {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45);
-  }
-  .lb-close {
-    position: absolute; top: 0.75rem; right: 0.75rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    background: rgba(0,0,0,0.5); border: none; cursor: pointer;
-    padding: 0.3rem 0.6rem; color: #fff;
-    transition: opacity 0.15s; z-index: 1;
-  }
-  .lb-close:hover { opacity: 0.5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100vh; background: var(--void); color: var(--star); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 60% 50% at 10% 20%, rgba(var(--cr),0.08) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 90% 80%, rgba(var(--cr),0.05) 0%, transparent 55%); pointer-events: none; z-index: 0; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(var(--cr),0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--cr),0.025) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
+  header { position: sticky; top: 0; z-index: 100; background: rgba(3,4,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(var(--cr),0.14); padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--star); text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
+  .logo-gem { width: 10px; height: 10px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 10px var(--c); }
+  .header-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.22); }
+  .mod-hero { position: relative; z-index: 1; padding: 3rem 2rem 2.5rem; border-bottom: 1px solid rgba(var(--cr),0.1); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; overflow: hidden; }
+  .mod-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(var(--cr),0.06) 0%, transparent 60%); pointer-events: none; }
+  .mod-eyebrow { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--c); opacity: 0.75; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .mod-eyebrow::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
+  .mod-title { font-weight: 700; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 0.9; color: var(--c); text-shadow: 0 0 40px rgba(var(--cr),0.3); }
+  .mod-right { font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,196,255,0.18); text-align: right; line-height: 2; white-space: nowrap; }
+  .mod-count-big { font-weight: 700; font-size: 5.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(var(--cr),0.18); letter-spacing: -0.05em; display: block; }
+  .nav-row { position: relative; z-index: 1; padding: 1rem 2rem 0.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid rgba(var(--cr),0.07); }
+  .nav-btn { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--star); background: transparent; border: 1px solid rgba(var(--cr),0.3); padding: 0.42rem 1.1rem; text-decoration: none; transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+  .nav-btn:hover { background: rgba(var(--cr),0.14); border-color: var(--c); color: #fff; }
+  .main { position: relative; z-index: 1; padding: 2rem; }
+  .section-label { font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(200,196,255,0.2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--cr),0.25), transparent); }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: rgba(var(--cr),0.06); border: 1px solid rgba(var(--cr),0.06); }
+  .proj-card { background: var(--panel); cursor: pointer; position: relative; overflow: hidden; transition: background 0.2s; border: 1px solid rgba(var(--cr),0.07); }
+  .proj-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--c), transparent); opacity: 0.5; }
+  .proj-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top right, rgba(var(--cr),0.07) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; z-index: 1; }
+  .proj-card:hover { background: #0d0b1e; border-color: rgba(var(--cr),0.35); }
+  .proj-card:hover::before { opacity: 1; }
+  .proj-card:hover .card-img { transform: scale(1.04); filter: brightness(0.9) saturate(1.15); }
+  .card-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; filter: brightness(0.68) saturate(0.7); transition: filter 0.3s, transform 0.4s; background: #0a0820; }
+  .card-img-placeholder { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0d0b1e, #080614); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.2em; color: rgba(var(--cr),0.3); text-transform: uppercase; flex-direction: column; gap: 0.5rem; }
+  .card-label { padding: 0.6rem 0.7rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(var(--cr),0.08); position: relative; z-index: 2; }
+  .card-tag { font-family: 'Courier Prime', monospace; font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c); opacity: 0.85; display: flex; align-items: center; gap: 0.35rem; }
+  .card-tag::before { content: ''; width: 4px; height: 4px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 5px var(--c); }
+  .card-open { font-family: 'Courier Prime', monospace; font-size: 0.46rem; letter-spacing: 0.12em; color: rgba(200,196,255,0.2); text-transform: uppercase; transition: color 0.2s; }
+  .proj-card:hover .card-open { color: var(--c); }
+  .modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(3,4,10,0.93); align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto; backdrop-filter: blur(10px); }
+  .modal.open { display: flex; }
+  .modal-box { background: var(--panel); border: 1px solid rgba(var(--cr),0.22); width: 100%; max-width: 880px; position: relative; margin: auto; box-shadow: 0 0 80px rgba(var(--cr),0.1); }
+  .modal-top-bar { height: 2px; background: linear-gradient(90deg, var(--c), #ff2d78, transparent); }
+  .modal-header { padding: 1rem 1.25rem 0.85rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(var(--cr),0.1); }
+  .modal-mod-id { font-family: 'Courier Prime', monospace; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.25em; color: var(--c); background: rgba(var(--cr),0.1); border: 1px solid rgba(var(--cr),0.25); padding: 0.2rem 0.55rem; display: flex; align-items: center; gap: 0.4rem; }
+  .modal-mod-id::before { content: ''; width: 5px; height: 5px; background: var(--c); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); box-shadow: 0 0 6px var(--c); }
+  .modal-title { font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.15em; color: var(--star); text-transform: uppercase; flex: 1; margin: 0 0.75rem; }
+  .modal-close { font-family: 'Courier Prime', monospace; font-size: 0.52rem; letter-spacing: 0.2em; color: rgba(200,196,255,0.35); background: transparent; border: 1px solid rgba(200,196,255,0.12); padding: 0.3rem 0.7rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+  .modal-close:hover { color: #fff; border-color: rgba(200,196,255,0.4); }
+  .modal-img-wrap { position: relative; border-bottom: 1px solid rgba(var(--cr),0.1); background: #000; }
+  .modal-img { width: 100%; max-height: 480px; display: block; object-fit: contain; }
+  .modal-img-placeholder { min-height: 200px; display: flex; align-items: center; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 0.55rem; letter-spacing: 0.22em; color: rgba(var(--cr),0.25); text-transform: uppercase; flex-direction: column; gap: 0.6rem; }
+  .modal-body { padding: 1.5rem 1.25rem; }
+  .modal-body p { font-family: 'EB Garamond', serif; font-size: 0.95rem; line-height: 1.88; color: rgba(200,196,255,0.62); margin-bottom: 1rem; }
+  .modal-body p:last-of-type { margin-bottom: 0; }
+  .modal-link { margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid rgba(var(--cr),0.1); }
+  .link-label { font-family: 'Courier Prime', monospace; font-size: 0.48rem; letter-spacing: 0.28em; color: rgba(200,196,255,0.18); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .modal-link a { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Courier Prime', monospace; font-size: 0.56rem; letter-spacing: 0.08em; color: var(--c); text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
+  .modal-link a:hover { opacity: 1; }
+  footer { position: relative; z-index: 1; text-align: center; padding: 2rem; border-top: 1px solid rgba(var(--cr),0.08); font-family: 'Courier Prime', monospace; font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,196,255,0.12); }
 </style>
 </head>
 <body>
 
-<nav>
-  <span class="nav-title">Speculation Capsule</span>
-  <div class="nav-links">
-    <a href="index.html">← All Modules</a>
-    <a href="splash.html">Splash</a>
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-gem"></div>
+    Speculation Capsule
+  </a>
+  <div class="header-right">ART104 · Spring 2026 · MOD·02</div>
+</header>
+
+<div class="mod-hero">
+  <div>
+    <div class="mod-eyebrow">module 02 · embodied systems · selfhood · presence</div>
+    <h1 class="mod-title">Human / Self<br>/ Identity / Body</h1>
   </div>
-</nav>
-
-<div class="hero">
-  <p class="hero-eyebrow">ART104 · Spring 2026 · Module 02 · Transmitting</p>
-  <h1>Human / Self / Identity / Body</h1>
-  <p class="hero-sub">Embodied systems / selfhood / presence</p>
-  <p class="hero-meta">7 artifacts</p>
-</div>
-
-<div class="content">
-  <div class="img-grid" id="grid"></div>
-  <div class="module-nav">
-    <span><a href="module01.html">← Module 01</a></span>
-    <span><a href="module03.html">Module 03 →</a></span>
+  <div class="mod-right">
+    <span class="mod-count-big">07</span>
+    07 artifacts<br>Spring 2026
   </div>
 </div>
 
-<footer>
-  <span>ART104 · Spring 2026</span>
-  <span>Module 02 of 06</span>
-</footer>
+<div class="nav-row">
+  <a href="module01.html" class="nav-btn">← Module 01</a>
+  <a href="module03.html" class="nav-btn">Module 03 →</a>
+</div>
 
-<div id="lightbox">
-  <div class="lb-inner">
-    <button class="lb-close" id="lb-close-btn">✕ Close</button>
-    <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
-    <div class="lb-info">
-      <p class="lb-eyebrow" id="lb-eyebrow"></p>
-      <h2 class="lb-title" id="lb-title"></h2>
-      <p class="lb-artist" id="lb-artist"></p>
-      <p class="lb-desc" id="lb-desc"></p>
-      <p class="lb-module" id="lb-module"></p>
+<main class="main">
+  <div class="section-label">7 artifacts · human / self / identity / body</div>
+  <div class="project-grid" id="grid"></div>
+</main>
+
+<footer>ART104 · Spring 2026 · MOD·02 · 07 Artifacts · Speculation Capsule</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-top-bar"></div>
+    <div class="modal-header">
+      <span class="modal-mod-id" id="modal-mod-label">MOD·02</span>
+      <span class="modal-title" id="modal-title">Artifact 01</span>
+      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+    </div>
+    <div class="modal-img-wrap" id="modal-img-wrap">
+      <div class="modal-img-placeholder"><span id="modal-img-label">image placeholder</span></div>
+    </div>
+    <div class="modal-body">
+      <div id="modal-text"></div>
     </div>
   </div>
 </div>
 
 <script>
-const ARTIFACTS = [
-  {
-    img: 'images/human1.png',
-    title: 'Artifact 01',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+const moduleData = {
+  "1": {
+    img: "human1.png",
+    title: "Christian, Nhat, Zhiyun",
+    p1: "The conflict between human cognition and continuous connectivity is explored in this piece of art. The artwork depicts the human body as both a biological organ and a node inside a data system by fusing networked interfaces with organic anatomy.",
+    p2: "A human is positioned beneath a curved screen at the bottom, and there is a direct physical connection between the human and the machine via thick cables that wrap around the head and stretch upward into the display. Like a control panel, the light screen arcs, implying monitoring, submersion, and reliance on digital infrastructure. The image is linked to more general discussions about device addiction, data extraction, and the urge to stay online by the strong red writing that reads, \"BE CONNECTED,\" echoing the advertising language of tech companies.",
+    p3: "The striking red writing challenges the audience, inviting deeper engagement with the work—moving it from observation to confrontation. What happens to the barriers between your mind and the network when connection turns into an order instead of an option?",
+    link: "https://www.zine.baby/"
   },
-  {
-    img: 'images/human2.png',
-    title: 'Artifact 02',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "2": {
+    img: "human2.png",
+    title: "Ethan, Chloe, Jo",
+    p1: "Our speculative art piece, Hey Friend, is a virtual reality experience that looks into themes of identity, human interaction, and artificial intelligence. It investigates the idea of human identity through the customization of virtual avatars and the continuous evolution of AI's intelligence and adaptation of humanistic characteristics. This prompted the thought of how you would differentiate between AI and humans in a virtual environment.",
+    p2: "The project will take place in virtual reality, functioning as an online game/experience where you'll be placed into a fully explorable virtual recreation of real-world locations. Inside the world, you'll be surrounded by different avatars, created and controlled by people or AI. The avatars would have limitless customizable options, allowing full creative freedom. But this also applies to the AI that essentially becomes advanced NPCs pretending to be human. There isn't necessarily a goal or win condition, but once you are finished playing, you'll be told how many humans and AI you interacted with.",
+    p3: "Hey Friend asks people to consider what makes a human, human. With AI constantly evolving and being trained to become more human-like, could you tell the difference if it were standing directly in front of you?",
+    link: "https://www.zine.baby/ethan/group-2-zine"
   },
-  {
-    img: 'images/human3.png',
-    title: 'Artifact 03',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "3": {
+    img: "human3.png",
+    title: "Phin, Starr, Brianna",
+    p1: "My Computer is a speculative computer design that can physically transform into different appearances, depending on which 4 versions (glitter, crystals, metallic, transparent) I am feeling for the day. This computer has all the necessities and abilities that I need, such as good speakers, the ability to grow another monitor, built-in projector, every port needed, does not ever overheat, runs every program in existence, has a detachable screen, can float, and it can project holograms.",
+    p2: "I like to have the liberty to change the look of my things. I would love to be able to do that with a computer, but I would want to push that change even further. I like the idea of being able to express yourself through your own technology, but imagine if we could do more than just change our computer's wallpaper, the look of the folders, cursor appearance, or cases—and be able to physically transform it into something else.",
+    link: "https://www.zine.baby/phin-nguyen-sjsu-edu/art104"
   },
-  {
-    img: 'images/human4.png',
-    title: 'Artifact 04',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "4": {
+    img: "human4.png",
+    title: "Gabrielle C., Emis C., David N.",
+    p1: "\"Avatar Creator\" is a commentary on the relationship between digital identities and real ones, and how the perception of these digital avatars harms their creators. The work reflects not only upon inaccurate depictions of self, but also the ways in which technology encourages this dissociation from one's real identity.",
+    p2: "Our piece depicts one such user of an avatar creator, changing aspects about themselves to the point of being unrecognizable. In dull, dark tones, the human creates a stark contrast to all the bright, glowing windows of the avatar creator. Each window poses the options of this creation system, mimicking real life character customization options, with sliders and folders that store aspects of the user to change. In this piece, the user abuses these tools to create an avatar so far removed from themselves—an anime-esque character with no resemblance to its creator—that it causes an error window to appear, yet there is no solution to fix it, only more changes to be made.",
+    p3: "While the system is only a fictional depiction, \"Avatar Creator\" asks the question of how far these avatars can go, of how much about your digital self you can change with it still being you.",
+    link: "https://www.zine.baby/gabrielle/group-4-mod-2"
   },
-  {
-    img: 'images/human5.png',
-    title: 'Artifact 05',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "5": {
+    img: "human5.png",
+    title: "Catherine, Rosalva, Rosemarie",
+    p1: "The digital illustration was made to explore the mental impacts that social media has on women and their body image. The piece also explores how vulnerable it feels when constantly exposing yourself on social media.",
+    p2: "The design of the illustration was to showcase the effects of social media on women by displaying phone cameras focusing on certain parts of the body—the face, chest area, and stomach. With the phone screens, the inside of the body is viewable, showcasing how exposing it is to constantly post yourself on the internet. There are also distinguishable social media icons like the followers and like button to show what many young people seek after when posting on social media. This is further cemented by the woman directly looking at the like button, showcasing where her attention is at.",
+    p3: "This begs the question: what parts of ourselves are we exposing when we post on social media?",
+    link: "https://www.zine.baby/rosalva/test"
   },
-  {
-    img: 'images/human6.png',
-    title: 'Artifact 06',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "6": {
+    img: "human6.png",
+    title: "Tai, David, Samantha",
+    p1: "This design is a concept for a future where humans are monitored by AI through a brain chip, a watch, and an exoskeleton.",
+    p2: "The Brain Chip sits inside your head and tracks how much you rely on AI to think. The Watch shows your \"AI Score\"—if you use AI too much, your score goes up, and it becomes harder to get a job; you can also scan other people's watches to see their scores. The Exoskeleton is a suit that \"fixes\" your body: if you make a mistake while moving, the suit automatically moves your arms or legs to do it the \"right\" way.",
+    link: "https://www.zine.baby/"
   },
-  {
-    img: 'images/human7.png',
-    title: 'Artifact 07',
-    artist: 'Student Work',
-    desc: 'A speculative artifact from Module 02: Human / Self / Identity / Body.',
-    module: 'Module 02 · Human / Self / Identity / Body'
+  "7": {
+    img: "human7.png",
+    title: "Ryan, David, Miah, Stella",
+    p1: "Humanized Roomba: a cleaning robot that has more functions than intended. With emotional output and human personality traits, this Roomba can become more than just a tool. Integrating human functions into technology, the Humanized Roomba becomes an entity that plays with the idea of giving robotics a personality—and free thinking.",
+    link: "https://www.zine.baby/ryan/group-7-speculative-art-showcase"
   }
-];
+};
 
-function openLightbox(a) {
-  document.getElementById('lb-img').src = a.img;
-  document.getElementById('lb-img').alt = a.title;
-  document.getElementById('lb-eyebrow').textContent = a.module;
-  document.getElementById('lb-title').textContent = a.title;
-  document.getElementById('lb-artist').textContent = a.artist;
-  document.getElementById('lb-desc').textContent = a.desc;
-  document.getElementById('lb-module').textContent = a.module;
-  document.getElementById('lightbox').classList.add('open');
+function buildGrid() {
+  const grid = document.getElementById('grid');
+  Object.keys(moduleData).forEach(id => {
+    const d = moduleData[id];
+    const card = document.createElement('div');
+    card.className = 'proj-card';
+    const imgEl = d.img ? `<img class="card-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : '';
+    const placeholderStyle = d.img ? 'display:none' : '';
+    card.innerHTML = `
+      ${imgEl}
+      <div class="card-img-placeholder" style="${placeholderStyle}">
+        <span>ART·${String(id).padStart(2,'0')}</span>
+      </div>
+      <div class="card-label">
+        <span class="card-tag">ART·${String(id).padStart(2,'0')}</span>
+        <span class="card-open">Open →</span>
+      </div>`;
+    card.addEventListener('click', () => openModal(id));
+    grid.appendChild(card);
+  });
 }
 
-const grid = document.getElementById('grid');
-ARTIFACTS.forEach(a => {
-  const item = document.createElement('div');
-  item.className = 'img-grid-item';
-  item.innerHTML = `<img src="${a.img}" alt="${a.title}" loading="lazy"><div class="img-label">${a.title}</div>`;
-  item.addEventListener('click', () => openLightbox(a));
-  grid.appendChild(item);
-});
+function openModal(id) {
+  const d = moduleData[id];
+  const padId = String(id).padStart(2,'0');
+  document.getElementById('modal-mod-label').textContent = `MOD·02 / ART·${padId}`;
+  document.getElementById('modal-title').textContent = d.title || `Artifact ${padId}`;
 
-document.getElementById('lb-close-btn').addEventListener('click', () =>
-  document.getElementById('lightbox').classList.remove('open'));
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('open');
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
-});
+  const wrap = document.getElementById('modal-img-wrap');
+  if (d.img) {
+    wrap.innerHTML = `<img class="modal-img" src="images/${d.img}" alt="artifact ${id}" onerror="this.outerHTML='<div class=modal-img-placeholder><span>image: ${d.img}</span></div>'">`;
+  } else {
+    wrap.innerHTML = `<div class="modal-img-placeholder"><span>image placeholder — ART·${padId}</span></div>`;
+  }
+
+  const linkHTML = d.link ? `
+    <div class="modal-link">
+      <div class="link-label">◈ Link</div>
+      <a href="${d.link}" target="_blank" rel="noopener">↗ ${d.link}</a>
+    </div>` : '';
+
+  document.getElementById('modal-text').innerHTML = `
+    <p>${d.p1}</p>
+    ${d.p2 ? `<p>${d.p2}</p>` : ''}
+    ${d.p3 ? `<p>${d.p3}</p>` : ''}
+    ${linkHTML}`;
+
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('modal').scrollTop = 0;
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+buildGrid();
 </script>
 </body>
 </html>
